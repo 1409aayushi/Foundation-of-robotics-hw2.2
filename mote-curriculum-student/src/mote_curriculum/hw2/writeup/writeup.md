@@ -24,7 +24,7 @@ $v_L = v - \frac{\omega b}{2}$
 Right Wheel Velocity Equation:
 $v_R = v + \frac{\omega b}{2}$
 
-[Q1.1 Supporting Work](src\mote_curriculum\hw2\images\q1.1.jpeg)
+![Q1.1 Supporting Work](..\images\q1.1.jpeg)
 <!---
 
 You can use LaTeX syntax like so: $a_{example} = b_{example} + c_{example}$.
@@ -43,7 +43,7 @@ Angular Velocity for Right Wheel Equation:
 
 $\boxed{\dot{\phi}_R = \frac{2v_r}{d}}$
 
-[Q1.2 Supporting Work](src\mote_curriculum\hw2\images\q1.2.jpeg)
+![Q1.2 Supporting Work](..\images\q1.2.jpeg)
 
 **Q1.3:** 
 
@@ -55,13 +55,19 @@ Angular Velocity Equation:
 
 $\boxed{\omega = \frac{v_r - v_l}{b}}$
 
-[Q1.3 Supporting Work](src\mote_curriculum\hw2\images\q1.3.jpeg)
+![Q1.3 Supporting Work](../images/q1.3.jpeg)
 
 ## Q2. Inverse Kinematics (20 pts)
 
 **Q2.2:** 
 
+![Q2.2 IMU Graph](..\images\q2.2imu.png)
+
+![Q2.2 Joint States Graph](..\images\q2.2jointstates.png)
+
 **Q2.3:** 
+
+The predicted and actual velocities are relatively similar. The trends for both the right and left wheels show similar peaks, increases, and decreases in velocity. One of the major differences is that the predicted velocities respond earlier than the actual velocities due to delays in the physical system. When the joystick is moved, the input signal must first be transmitted via Bluetooth to the robot's control board. The board then processes the signal and sends commands to the motors. Afterward, the measured velocity data must be transmitted back through Bluetooth and displayed graphically. These additional steps introduce delays in the actual velocity response. In contrast, the theoretical model uses the joystick input to instantly predict the robot's velocity without accounting for communication and processing delays. This explains why the predicted velocities generally respond earlier than the actual measured velocities.
 
 ## Q3. Forward Kinematics (20 pts)
 
@@ -81,3 +87,4 @@ $\boxed{\omega = \frac{v_r - v_l}{b}}$
 ## Use of AI
 
 - Used AI in question 1 to help convert equations into LaTeX form.
+- Used AI in question 2.2 to help clean up gramatical errors in my response.
