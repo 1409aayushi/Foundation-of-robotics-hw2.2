@@ -24,6 +24,7 @@ class odometry:
         QUESTION 4.2 BEGINS
         """
         # create a TransformBroadcaster once so it can be reused in the callback
+        self.tf_broadcaster = tf.TransformBroadcaster()
 
         """
         QUESTION 4.2 ENDS
@@ -66,19 +67,33 @@ class odometry:
         # This function just performs a single integration step, so you can assume that the rover is moving at a constant velocity during this time step
 
         # set the twist in the self.odometry_msg, then ...
+        self.odometry_msg.twist.twist = msg.twist
 
         # ... update the pose orientation, then ...
         # HINT: you can use tf.transformations.euler_from_quaternion and 
         #       tf.transformations.quaternion_from_euler to convert between euler angles and quaternions
+        orientation = self.odometry_msg.pose.pose.orientation
+        _, _, yaw = tf.transformations.euler_from_quaternion(
+            [orientation.x, orientation.y, orientation.z, orientation.w]
+        )
+
+        new_yaw = yaw + angular_velocity * dt
+        quat = tf.transformations.quaternion_from_euler(0, 0, new_yaw)
+        self.odometry_msg.pose.pose.orientation = Quaternion(*quat)
 
         # ... update the pose position, then ...
         # HINT: you SHOULDN'T assume the angle is constant during the integration step.
         #       so you should use the current yaw angle plus half of the angular velocity times dt (the heading at the middle of the step) to calculate the change in x and y position
+        mid_yaw = yaw + angular_velocity * dt / 2
+        self.odometry_msg.pose.pose.position.x += linear_velocity * math.cos(mid_yaw) * dt
+        self.odometry_msg.pose.pose.position.y += linear_velocity * math.sin(mid_yaw) * dt
+        self.odometry_msg.pose.pose.position.z = 0.0
 
         # ... update the message header, then ...
+        self.odometry_msg.header.stamp = msg.header.stamp
 
         # ... publish the message
-
+        self.odometry_publisher.publish(self.odometry_msg)
 
         """ 
         QUESTION 4.1 ENDS
@@ -91,7 +106,15 @@ class odometry:
 
         # use the TransformBroadcaster from __init__ to  broadcast a transform from "odom" to "base_link"
         # HINT: you can use tf.TransformBroadcaster.sendTransform to send the transform
-        
+        position = self.odometry_msg.pose.pose.position
+        orientation = self.odometry_msg.pose.pose.orientation
+        self.tf_broadcaster.sendTransform(
+            (position.x, position.y, 0.0),
+            (orientation.x, orientation.y, orientation.z, orientation.w),
+            rospy.Time.now(),
+            "base_link",  # child frame
+            "odom",  # parent frame
+        )
 
         """
         QUESTION 4.2 ENDS
