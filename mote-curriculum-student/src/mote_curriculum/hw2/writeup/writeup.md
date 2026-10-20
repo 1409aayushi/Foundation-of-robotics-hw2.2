@@ -24,7 +24,7 @@ $v_L = v - \frac{\omega b}{2}$
 Right Wheel Velocity Equation:
 $v_R = v + \frac{\omega b}{2}$
 
-![Q1.1 Supporting Work](..\images\q1.1.jpeg)
+![Q1.1 Supporting Work](../images/q1.1.jpeg)
 <!---
 
 You can use LaTeX syntax like so: $a_{example} = b_{example} + c_{example}$.
@@ -43,7 +43,7 @@ Angular Velocity for Right Wheel Equation:
 
 $\boxed{\dot{\phi}_R = \frac{2v_r}{d}}$
 
-![Q1.2 Supporting Work](..\images\q1.2.jpeg)
+![Q1.2 Supporting Work](../images/q1.2.jpeg)
 
 **Q1.3:** 
 
@@ -61,9 +61,9 @@ $\boxed{\omega = \frac{v_r - v_l}{b}}$
 
 **Q2.2:** 
 
-![Q2.2 IMU Graph](..\images\q2.2imu.png)
+![Q2.2 IMU Graph](../images/q2.2imu.png)
 
-![Q2.2 Joint States Graph](..\images\q2.2jointstates.png)
+![Q2.2 Joint States Graph](../images/q2.2jointstates.png)
 
 **Q2.3:** 
 
